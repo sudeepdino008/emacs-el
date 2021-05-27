@@ -3,11 +3,7 @@
 
 
 
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-everywhere t)
-;;(ido-mode 1)
-
-;; Initialize package sources
+;; setup sources
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
@@ -30,6 +26,8 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+;; setup sources end
 
 (use-package realgud)
 
@@ -133,7 +131,7 @@
      ("https://hnrss.org/frontpage" cs career)
      ("https://opensource.com/feed" opensource cs)))
  '(package-selected-packages
-   '(flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
+   '(smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -251,12 +249,15 @@
          )
   )
 
-
 ;; looks
+(setq ns-auto-hide-menu-bar t)
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark)) 
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;;(load-theme 'granger t)
-;;(load-theme 'deeper-blue)
-(load-theme 'wombat)
+(load-theme 'deeper-blue)
+;;(load-theme 'wombat)
 (add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'default-frame-alist '(width . 130))
 ;;(add-to-list 'load-path "~/.emacs.d/emacs-vim-modeline")
@@ -323,7 +324,6 @@
 
 (show-paren-mode 1) ;highlighting matching parenthses
 (blink-cursor-mode 1)
-(tool-bar-mode -1)
 (which-function-mode)
 
 (global-font-lock-mode 1)
@@ -579,7 +579,7 @@ end-of-buffer signals; pass the rest to the default handler."
               ("C-c C-c q" . lsp-workspace-restart)
               ("C-c C-c Q" . lsp-workspace-shutdown)
               ("C-c C-c s" . lsp-rust-analyzer-status)
-              ("<s-mouse-1>" . xref-find-definitions-at-mouse)
+;;              ("<s-mouse-1?" . xref-find-definitions-at-mouse)  ;; causes problems when entering <
               ("M-." . xref-find-definitions)
               ("s-." . xref-find-definitions-other-window)
               )
@@ -736,3 +736,4 @@ end-of-buffer signals; pass the rest to the default handler."
 
 ;;
 (use-package helm-ag)
+(setq org-src-fontify-natively nil)
