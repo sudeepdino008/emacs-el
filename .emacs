@@ -533,7 +533,10 @@ end-of-buffer signals; pass the rest to the default handler."
 (use-package projectile
   :bind (
          ("C-x p p" . 'projectile-switch-project)
+         ("C-x p k" . 'projectile-kill-buffers)
          )
+  :config
+  (recentf-mode)
   )
 
 (use-package counsel-projectile
