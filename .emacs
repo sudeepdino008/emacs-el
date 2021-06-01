@@ -131,7 +131,7 @@
      ("https://hnrss.org/frontpage" cs career)
      ("https://opensource.com/feed" opensource cs)))
  '(package-selected-packages
-   '(smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
+   '(lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -213,7 +213,7 @@
    (python-shell-interpreter "~/.pyenv/versions/3.8.0/bin/python")
    )
 
-(setq lsp-pyls-server-command "/Users/sudeepkumar/.local/bin/pyls")
+;;(setq lsp-pyls-server-command "/Users/sudeepkumar/.local/bin/pyls")
 
 
 
@@ -740,3 +740,12 @@ end-of-buffer signals; pass the rest to the default handler."
 ;;
 (use-package helm-ag)
 (setq org-src-fontify-natively nil)
+
+;; python setup
+
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
