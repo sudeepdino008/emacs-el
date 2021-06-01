@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: println!(text)
+# key: pri
+# --
+println!(\"$0\");
