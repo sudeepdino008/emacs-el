@@ -5,12 +5,12 @@
 
 ;; setup sources
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
-;;(add-to-list 'package-archives
-;;             '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+            '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-install 'use-package)
 
 
@@ -123,6 +123,8 @@
  ;; If there is more than one, they won't work right.
  '(ac-ispell-fuzzy-limit 4)
  '(ac-ispell-requires 4)
+ '(custom-safe-themes
+   '("58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" default))
  '(elfeed-feeds
    '("https://davedelong.com/feed.xml" "https://engineering.fb.com/feed/"
      ("https://jvns.ca/atom.xml" basics career)
@@ -131,7 +133,8 @@
      ("https://hnrss.org/frontpage" cs career)
      ("https://opensource.com/feed" opensource cs)))
  '(package-selected-packages
-   '(lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
+   '(command-log-mode centered-cursor-mode sublimity all-the-icons neotree lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm))
+ '(sublimity-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -221,7 +224,6 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/Users/sudeepkumar/.ghcup/bin/"))
 (setq exec-path (append exec-path '("/Users/sudeepkumar/.ghcup/bin/")))
-
 
 ;; cask load everything.
 ;;(let ((default-directory  "~/.emacs.d/.cask/"))
@@ -333,13 +335,15 @@
 (global-set-key (kbd "C-/") 'undo)
 
 
-;a couple of productivity incrementers
+;a couple of aliases
 (defalias 'rs 'replace-string)
 (defalias 'qr 'query-replace)
 (defalias 'rr 'replace-regexp)
 (defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
 (defalias 'qrr 'query-replace-regexp)
 (defalias 'g 'goto-line)
+
+(global-set-key (kbd "s-/") 'comment-line)
 (defalias 'cr 'comment-region)
 (defalias 'ur 'uncomment-region)
 
@@ -537,6 +541,7 @@ end-of-buffer signals; pass the rest to the default handler."
          )
   :config
   (recentf-mode)
+  (setq projectile-sort-order 'recentf)
   )
 
 (use-package counsel-projectile
@@ -662,15 +667,6 @@ end-of-buffer signals; pass the rest to the default handler."
   (let ((yasfallback-behavior 'return-nil))
     (yas-expand)))
 
-;; (defun tab-indent-or-complete ()
-;;   (interactive)
-;;   (if (minibufferp)
-;;       (minibuffer-complete)
-;;     (if (or (not yas-minor-mode)
-;;             (null (do-yas-expand)))
-;;         (if (check-expansion)
-;;             (company-complete-common)
-;;           (indent-for-tab-command)))))
 ;; rust setup ends
 
 
@@ -749,3 +745,35 @@ end-of-buffer signals; pass the rest to the default handler."
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp))))
+
+
+;; projectile project configuration sample - https://docs.projectile.mx/projectile/projects.html
+;; (projectile-register-project-type 'npm '("package.json")
+;;                                   :project-file "package.json"
+;; 				  :compile "npm install"
+;; 				  :test "npm test"
+;; 				  :run "npm start"
+;; 				  :test-suffix ".spec")
+
+
+;; Ruby + RSpec
+;; (projectile-register-project-type 'ruby-rspec '("Gemfile" "lib" "spec")
+;;                                   :project-file "Gemfile"
+;;                                   :compile "bundle exec rake"
+;;                                   :src-dir "lib/"
+;;                                   :test "bundle exec rspec"
+;;                                   :test-dir "spec/"
+;;                                   :test-suffix "_spec")
+
+
+;; neotree
+(use-package neotree
+  :bind(("<f8>" . neotree-toggle))
+  :config
+  (setq neo-theme 'arrow)
+  )
+
+(use-package centered-cursor-mode
+  :config
+  (centered-cursor-mode 1))
+(use-package command-log-mode)
