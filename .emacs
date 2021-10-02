@@ -31,9 +31,6 @@
 
 (use-package realgud)
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -123,8 +120,6 @@
  ;; If there is more than one, they won't work right.
  '(ac-ispell-fuzzy-limit 4)
  '(ac-ispell-requires 4)
- '(custom-safe-themes
-   '("58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" default))
  '(elfeed-feeds
    '("https://davedelong.com/feed.xml" "https://engineering.fb.com/feed/"
      ("https://jvns.ca/atom.xml" basics career)
@@ -132,14 +127,15 @@
      ("https://haskellweekly.news/newsletter.atom" haskell cs)
      ("https://hnrss.org/frontpage" cs career)
      ("https://opensource.com/feed" opensource cs)))
+ '(neo-smart-open t)
  '(package-selected-packages
-   '(command-log-mode centered-cursor-mode sublimity all-the-icons neotree lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm))
- '(sublimity-mode t))
+   '(command-log-mode centered-cursor-mode neotree lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#181a26" :foreground "gray80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "nil" :family "Monaco"))))
  '(fixed-pitch ((t (:family "Fira Code Retina" :height 160))))
  '(mode-line ((t (:background "#444444" :foreground "#f6f3e8" :height 0.75))))
  '(org-block ((t (:inherit fixed-pitch))))
@@ -247,7 +243,7 @@
   (add-hook 'emacs-startup-hook #'server-start)
 
   :bind (
-         ("s-s" . persp-switch)
+         ("s-M-s" . persp-switch)
          )
   )
 
@@ -461,7 +457,7 @@ end-of-buffer signals; pass the rest to the default handler."
 (load "~/.emacs.d/neuron-mode.el")
 (setq neuron-default-zettelkasten-directory "~/oss/zettelkasten")
 (setq neuron-executable "/Users/sudeepkumar/.nix-profile/bin/neuron")
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 150)
 
 ;;(load-file "~/.emacs.d/xah-math-input.el")
 (setq neuron-exclude-from-darkroom '("timelog"))
@@ -544,11 +540,6 @@ end-of-buffer signals; pass the rest to the default handler."
   (setq projectile-sort-order 'recentf)
   )
 
-(use-package counsel-projectile
-  :bind (("s-o" . counsel-projectile-find-file))
-  :config (counsel-projectile-mode))
-
-
 
 (use-package flx
   :config
@@ -620,6 +611,11 @@ end-of-buffer signals; pass the rest to the default handler."
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
   (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-ui-sideline-mode -1)
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-sideline-show-hover nil)
+
+
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
@@ -628,7 +624,10 @@ end-of-buffer signals; pass the rest to the default handler."
   :commands lsp-ui-mode
   :custom
   ;;(lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
+  ;;  (lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-sideline-show-hover nil)
+
   (lsp-ui-doc-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
@@ -775,5 +774,15 @@ end-of-buffer signals; pass the rest to the default handler."
 
 (use-package centered-cursor-mode
   :config
-  (centered-cursor-mode 1))
+  (global-centered-cursor-mode))
 (use-package command-log-mode)
+
+
+(use-package counsel-projectile
+  :bind (
+         ("s-o" . counsel-projectile-find-file)
+         ("s-s" . counsel-projectile-rg)
+         )
+  :config (counsel-projectile-mode))
+
+(global-auto-revert-mode t)
