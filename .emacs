@@ -1,7 +1,7 @@
 ;; /Applications/Emacs.app/Contents/MacOS/Emacs --daemon   ## start emacs in daemon mode...then emacsclient loads faster
 (setq inhibit-startup-screen t)
 
-
+;;(set-default 'truncate-lines t)
 
 ;; setup sources
 (require 'package)
@@ -12,7 +12,6 @@
             '("melpa" . "http://melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-install 'use-package)
-
 
 
 (require 'package)
@@ -100,6 +99,7 @@
          ("M-x" . 'counsel-M-x)
          ("C-x b" . 'persp-counsel-switch-buffer)
          ("C-," . 'persp-counsel-switch-buffer)
+         ("C-." . 'counsel-find-file)
          ("C-x C-b" . 'counsel-switch-buffer-other-window)
          )
   :bind (
@@ -120,6 +120,9 @@
  ;; If there is more than one, they won't work right.
  '(ac-ispell-fuzzy-limit 4)
  '(ac-ispell-requires 4)
+ '(awesome-tray-mode-line-active-color "#bcc3f0")
+ '(custom-safe-themes
+   '("c48551a5fb7b9fc019bf3f61ebf14cf7c9cdca79bcb2a4219195371c02268f11" "96998f6f11ef9f551b427b8853d947a7857ea5a578c75aa9c4e7c73fe04d10b4" "987b709680284a5858d5fe7e4e428463a20dfabe0a6f2a6146b3b8c7c529f08b" "e0d42a58c84161a0744ceab595370cbe290949968ab62273aed6212df0ea94b4" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "3cc2385c39257fed66238921602d8104d8fd6266ad88a006d0a4325336f5ee02" "e9776d12e4ccb722a2a732c6e80423331bcb93f02e089ba2a4b02e85de1cf00e" "b3775ba758e7d31f3bb849e7c9e48ff60929a792961a2d536edec8f68c671ca5" "3d5ef3d7ed58c9ad321f05360ad8a6b24585b9c49abcee67bdcbb0fe583a6950" "0d33da459fc1f82ad0508358484d846b47144a40c29cfc94a61dbc790b8f59a8" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" default))
  '(elfeed-feeds
    '("https://davedelong.com/feed.xml" "https://engineering.fb.com/feed/"
      ("https://jvns.ca/atom.xml" basics career)
@@ -127,16 +130,30 @@
      ("https://haskellweekly.news/newsletter.atom" haskell cs)
      ("https://hnrss.org/frontpage" cs career)
      ("https://opensource.com/feed" opensource cs)))
- '(neo-smart-open t)
+ '(max-mini-window-height 0.05)
  '(package-selected-packages
-   '(command-log-mode centered-cursor-mode neotree lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm)))
+   '(diminish awesome-tray mini-modeline atl-long-lines command-log-mode centered-cursor-mode sublimity all-the-icons neotree lsp-python-ms smooth-scrolling flx-ido helm-ag exec-path-from-shell rustic elixir-mode perspective use-package multiple-cursors spacemacs-theme real-auto-save counsel-projectile projectile company-jedi multi-term elfeed hide-mode-line sublime-themes pomidor eyebrowse haskell-snippets shm auto-correct ace-window hasklig-mode hc-zenburn-theme haskell-emacs haskell-mode company-irony irony gnu-elpa-keyring-update magit yaml-mode easy-jekyll scheme-complete swift-mode paced realgud json-mode flymd markdown-mode+ vlf helm))
+ '(resize-mini-windows t)
+ '(sublimity-mode t)
+ '(treemacs-RET-actions-config
+   '((treemacs-node-closed-state . lsp-treemacs-perform-ret-action)
+     (root-node-open . treemacs-toggle-node)
+     (root-node-closed . treemacs-toggle-node)
+     (dir-node-open . treemacs-toggle-node)
+     (dir-node-closed . treemacs-toggle-node)
+     (file-node-open . treemacs-visit-node-default)
+     (file-node-closed . treemacs-visit-node-default)
+     (tag-node-open . treemacs-toggle-node-prefer-tag-visit)
+     (tag-node-closed . treemacs-toggle-node-prefer-tag-visit)
+     (tag-node . treemacs-visit-node-default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#181a26" :foreground "gray80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "nil" :family "Monaco"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Monaco"))))
  '(fixed-pitch ((t (:family "Fira Code Retina" :height 160))))
+ '(font-lock-doc-face ((t (:foreground "moccasin" :height 0.9 :width condensed))))
  '(mode-line ((t (:background "#444444" :foreground "#f6f3e8" :height 0.75))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-code ((t (:inherit (shadow fixed-pitch)))))
@@ -220,6 +237,8 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/Users/sudeepkumar/.ghcup/bin/"))
 (setq exec-path (append exec-path '("/Users/sudeepkumar/.ghcup/bin/")))
+(setq exec-path (append exec-path '("/opt/homebrew/bin")))
+(setq exec-path (append exec-path '("/Users/sudeepkumar/.cargo/bin")))
 
 ;; cask load everything.
 ;;(let ((default-directory  "~/.emacs.d/.cask/"))
@@ -254,11 +273,21 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;;(load-theme 'granger t)
-(load-theme 'deeper-blue)
-;;(load-theme 'wombat)
+;; (if (display-graphic-p) 
+;;     (load-theme 'deeper-blue) 
+;;   (load-theme 'wombat))
+
+;;(load-theme 'tsdh-dark)
+;;(when (display-graphic-p)
+;;    (load-theme 'wombat))
+(load-theme 'wombat)
+
+
+;;(load-theme 'wombat)p
 (add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'default-frame-alist '(width . 130))
-;;(add-to-list 'load-path "~/.emacs.d/emacs-vim-modeline")
+
+
 (load "~/.emacs.d/smooth-scroll")
 (require 'smooth-scroll)
 (smooth-scroll-mode t)
@@ -270,9 +299,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/elpa/realgud-1.4.5/")
 (load-library "realgud")
+
 ;;TODO: control-option-command-v scroll-other-window -> no shortcut for scrolling down
 (global-set-key (kbd "C-S-v") 'smooth-scroll/scroll-other-window)
-
 
 ;; yasnipper
 (use-package yasnippet)
@@ -340,6 +369,9 @@
 (defalias 'g 'goto-line)
 
 (global-set-key (kbd "s-/") 'comment-line)
+(global-set-key (kbd "C-<return>") 'other-window)
+(global-set-key (kbd "s-<return>") 'other-window)
+
 (defalias 'cr 'comment-region)
 (defalias 'ur 'uncomment-region)
 
@@ -396,11 +428,12 @@ end-of-buffer signals; pass the rest to the default handler."
   (interactive)
   (load-file "~/.emacs"))
 
+;;(load-file "~/.emacs.d/awesome-tray.el")  ;; uggh, not worth the troubles
+;;(awesome-tray-mode)
+
 
 (save-place-mode)
 
-(setq create-lockfiles nil)
-(setq make-backup-files nil)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil) ; stop creating #autosave# files
 
@@ -454,32 +487,40 @@ end-of-buffer signals; pass the rest to the default handler."
 (add-hook 'darkroom-mode 'visual-line-mode)
 
 ;; neuron-mode aka zettelkasten
-(load "~/.emacs.d/neuron-mode.el")
-(setq neuron-default-zettelkasten-directory "~/oss/zettelkasten")
-(setq neuron-executable "/Users/sudeepkumar/.nix-profile/bin/neuron")
-(set-face-attribute 'default nil :height 150)
+
+(if (display-graphic-p)
+    (progn
+      ;; if graphic
+      (load "~/.emacs.d/neuron-mode.el")
+      (setq neuron-default-zettelkasten-directory "~/oss/zettelkasten")
+      (setq neuron-executable "/Users/sudeepkumar/.nix-profile/bin/neuron")
+      (setq neuron-exclude-from-darkroom '("timelog"))
+      (defun neuron-hooks ()
+        (setq neuron-title-format "# %s")
+        (local-set-key "\C-co" 'neuron-open-daily-notes)
+        (let ((filename-wextension (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
+          (if (member filename-wextension neuron-exclude-from-darkroom) nil
+            (progn
+              ;;(darkroom-tentative-mode)  ;; possibly crappy emacsclient loads
+              (set-fringe-mode 0)
+              )))
+        (flyspell-mode)
+        (flyspell-buffer)
+        (display-line-numbers-mode 0)
+        )
+ 
+      (add-hook 'neuron-mode-hook #'neuron-hooks)
+      (use-package hide-mode-line)
+      (require 'hide-mode-line)
+      (add-hook 'neuron-mode-hook  #'hide-mode-line-mode)
+      (add-hook 'emacs-startup-hook #'neuron-rib-serve)
+      )
+    ;; else (optional)
+)
+
+(set-face-attribute 'default nil :height 140)
 
 ;;(load-file "~/.emacs.d/xah-math-input.el")
-(setq neuron-exclude-from-darkroom '("timelog"))
-(defun neuron-hooks ()
-  (setq neuron-title-format "# %s")
-  (local-set-key "\C-co" 'neuron-open-daily-notes)
-  (let ((filename-wextension (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
-    (if (member filename-wextension neuron-exclude-from-darkroom) nil
-      (progn
-        ;;(darkroom-tentative-mode)  ;; possibly crappy emacsclient loads
-        (set-fringe-mode 0)
-        )))
-   (flyspell-mode)
-   (flyspell-buffer)
-   (display-line-numbers-mode 0)
-  )
- 
-(add-hook 'neuron-mode-hook #'neuron-hooks)
-(use-package hide-mode-line)
-(require 'hide-mode-line)
-(add-hook 'neuron-mode-hook  #'hide-mode-line-mode)
-(add-hook 'emacs-startup-hook #'neuron-rib-serve)
 
 
 ;; rss feed
@@ -565,12 +606,22 @@ end-of-buffer signals; pass the rest to the default handler."
               (push '("|>" . ?\u25B7) prettify-symbols-alist))))
 
 
+(use-package treemacs
+  :ensure t
+  :init
+  :bind (:map global-map
+              ("<f8>" . treemacs)
+              )
+  )
+
+;;  (global-set-key (kbd "<f8>") 'treemacs)
+
 
 ;; rust setup start
 (use-package rustic
   :ensure
   :bind (:map rustic-mode-map
-              ("M-j" . lsp-ui-imenu)
+              ("M-j" . lsp-treemacs-symbols)
               ("M-?" . lsp-find-references)
               ("C-c C-c l" . flycheck-list-errors)
               ("C-c C-c a" . lsp-execute-code-action)
@@ -585,21 +636,28 @@ end-of-buffer signals; pass the rest to the default handler."
   :config
   ;; uncomment for less flashiness
   (setq lsp-eldoc-hook nil)
+  (setq lsp-ui-sideline-show-code-actions nil)
   ;; (setq lsp-enable-symbol-highlighting nil)
   ;; (setq lsp-signature-auto-activate nil)
-  ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
+  
+  ;;(setq rustic-format-on-save t)  ;; bug which resets the cursor position to start of the screen
+  ;; therefore disabling
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
   (add-hook 'rustic-mode-hook 'rustic-doc-mode)
+  (add-hook 'rustic-after-compilation-hook 'rk/rustic-cargo-fmt-hook)
   (yas-minor-mode))
+
+(defun rk/rustic-cargo-fmt-hook ()
+  (print "blacksheep")
+  )
+
 
 (defun rk/rustic-mode-hook ()
   ;; so that run C-c C-c C-r works without having to confirm
-  (setq-local buffer-save-without-query t))
+  (setq-local buffer-save-without-query t)
+  )
 
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rustic-mode))
-
-
 
 
 (use-package lsp-mode
@@ -607,14 +665,16 @@ end-of-buffer signals; pass the rest to the default handler."
   :commands lsp
   :custom
   ;; what to use when checking on-save. "check" is default, I prefer clippy
+
+;;  (setq rustic-lsp-server 'rls)
   (lsp-rust-analyzer-cargo-watch-command "clippy")
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
-  (lsp-rust-analyzer-server-display-inlay-hints t)
-  (lsp-ui-sideline-mode -1)
-  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-rust-analyzer-server-display-inlay-hints t)
+  (setq lsp-rust-analyzer-inlay-hints t)
+;;  (lsp-ui-sideline-mode -1)
+;;  (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-sideline-show-hover nil)
-
 
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
@@ -623,16 +683,14 @@ end-of-buffer signals; pass the rest to the default handler."
   :ensure
   :commands lsp-ui-mode
   :custom
-  ;;(lsp-ui-peek-always-show t)
-  ;;  (lsp-ui-sideline-show-hover t)
-  (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-sideline-show-hover nil)
 
-  (lsp-ui-doc-enable t)
+;;  (setq lsp-ui-sideline-enable nil)
+;;  (setq lsp-ui-sideline-show-hover nil)
+  (setq lsp-ui-doc-enable nil)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   )
-
+(setq lsp-ui-doc-enable nil)  ;; dunno why, why this only works outside the use-package
 
 (use-package company
   :ensure
@@ -766,11 +824,14 @@ end-of-buffer signals; pass the rest to the default handler."
 
 
 ;; neotree
-(use-package neotree
-  :bind(("<f8>" . neotree-toggle))
-  :config
-  (setq neo-theme 'arrow)
-  )
+;; (use-package neotree
+;;   :bind(("<f8>" . neotree-toggle))
+;;   :config
+;;   (setq neo-theme 'arrow)
+;;   )
+
+
+
 
 (use-package centered-cursor-mode
   :config
@@ -786,3 +847,31 @@ end-of-buffer signals; pass the rest to the default handler."
   :config (counsel-projectile-mode))
 
 (global-auto-revert-mode t)
+
+
+(global-auto-revert-mode t)
+(global-so-long-mode 1)
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq-default bidi-display-reordering nil)
+(setq bidi-inhibit-bpa t)
+
+;; Let me switch windows with shift-arrows instead of "C-x o" all the time
+(windmove-default-keybindings)
+
+;; Note that uniquify is builtin.
+(require 'uniquify)
+(setq uniquify-separator "/"               ;; The separator in buffer names.
+      uniquify-buffer-name-style 'forward) ;; names/in/this/style
+
+(defun my-minibuffer-setup ()
+       (set (make-local-variable 'face-remapping-alist)
+          '((default :height 0.8))))
+
+(add-hook 'minibuffer-setup-hook 'my-minibuffer-setup)
+
+
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)

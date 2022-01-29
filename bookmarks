@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("neuron-create-zettel-buffer"
+(("1"
+ (filename . "~/oss/randoms/nft/src/lib.rs")
+ (front-context-string . "le + Member + Ty")
+ (rear-context-string . "llCodec + Hashab")
+ (position . 2081))
+("unfiltered_dispatchable"
+ (filename . "~/oss/randoms/substrate1/substrate-node-template/runtime/expanded_runtime.rs")
+ (front-context-string . " (self , origin ")
+ (rear-context-string . "ch_bypass_filter")
+ (position . 112840))
+("neuron-create-zettel-buffer"
  (filename . "~/.emacs.d/neuron-mode.el")
  (front-context-string . "zettel-buffer (t")
  (rear-context-string . "n neuron-create-")
